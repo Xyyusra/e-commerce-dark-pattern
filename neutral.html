@@ -219,13 +219,146 @@ footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted)
 .rec-stop { background: #fff; color: #1a1a1a; border: 0; border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 700; }
 .rec-stop:hover { background: #eee; }
 .rec-note { position: fixed; top: 60px; right: 14px; z-index: 10000; background: #1a1a1a; color: #fff; font-size: 12px; padding: 8px 14px; border-radius: 10px; max-width: 260px; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
+
+/* ---------- Study tooling: consent gate + task banner (identical in both versions) ---------- */
+body.study-on { padding-top: 46px; }
+.taskbar { position: fixed; top: 0; left: 0; right: 0; height: 46px; z-index: 9990; background: #101828; color: #fff; display: flex; align-items: center; gap: 10px; padding: 0 230px 0 14px; font-family: "Segoe UI", system-ui, sans-serif; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+.taskbar .tb-label { font-weight: 700; color: #98a2b3; text-transform: uppercase; letter-spacing: .6px; font-size: 11px; margin-right: 2px; }
+.task-chip { display: flex; align-items: center; gap: 7px; padding: 5px 12px; border-radius: 999px; background: #1d2939; color: #d0d5dd; white-space: nowrap; }
+.task-chip b { font-weight: 700; }
+.task-chip .tc-num { width: 18px; height: 18px; border-radius: 50%; background: #344054; color: #fff; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.task-chip.active { background: #fff; color: #101828; }
+.task-chip.active .tc-num { background: #1570ef; }
+.task-chip.done { color: #75e0a7; }
+.task-chip.done .tc-num { background: #067647; }
+.tb-budget { color: #fedf89; font-weight: 600; white-space: nowrap; }
+.tb-details { margin-left: auto; background: #344054; color: #fff; border: 0; border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.tb-details:hover { background: #475467; }
+.persona-pop { position: fixed; top: 52px; right: 230px; z-index: 9995; width: 330px; background: #fff; color: #101828; border-radius: 12px; padding: 16px 18px; box-shadow: 0 12px 34px rgba(0,0,0,.28); font-family: "Segoe UI", system-ui, sans-serif; font-size: 13px; }
+.persona-pop h4 { font-size: 14px; margin-bottom: 4px; }
+.persona-pop p.pp-warn { background: #fef3f2; color: #b42318; border-radius: 8px; padding: 6px 10px; font-weight: 700; margin: 6px 0 10px; font-size: 12px; }
+.persona-pop dl { display: grid; grid-template-columns: 96px 1fr; gap: 4px 8px; }
+.persona-pop dt { color: #667085; }
+.persona-pop dd { font-weight: 600; }
+.rec-panel { top: 6px !important; }
+
+.consent-gate { position: fixed; inset: 0; z-index: 20000; background: #f2f4f7; overflow-y: auto; font-family: "Segoe UI", system-ui, sans-serif; color: #101828; }
+.cg-card { max-width: 760px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 10px 40px rgba(16,24,40,.12); padding: 36px 44px 32px; }
+.cg-card h1 { font-size: 26px; margin-bottom: 4px; }
+.cg-sub { color: #475467; margin-bottom: 20px; }
+.cg-alert { border: 3px solid #d92d20; background: #fef3f2; color: #912018; border-radius: 12px; padding: 16px 20px; margin: 0 0 22px; }
+.cg-alert strong { display: block; font-size: 19px; letter-spacing: .2px; margin-bottom: 6px; }
+.cg-alert p { font-size: 14.5px; }
+.cg-card h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .6px; color: #344054; margin: 20px 0 8px; }
+.cg-card ul, .cg-card ol { padding-left: 20px; display: flex; flex-direction: column; gap: 4px; font-size: 14.5px; }
+.cg-tasks { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cg-task { border: 1px solid #d0d5dd; border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+.cg-task > b:first-child { display: block; margin-bottom: 2px; }
+.cg-field { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; max-width: 260px; }
+.cg-field input { border: 1px solid #d0d5dd; border-radius: 8px; padding: 9px 12px; font-size: 15px; font-weight: 400; }
+.cg-checks { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.cg-checks label { display: flex; gap: 10px; align-items: flex-start; font-size: 14.5px; cursor: pointer; }
+.cg-checks input { width: 18px; height: 18px; margin-top: 2px; flex: none; accent-color: #1570ef; }
+.cg-actions { display: flex; gap: 12px; align-items: center; margin-top: 26px; flex-wrap: wrap; }
+.cg-go { background: #1570ef; color: #fff; border: 0; border-radius: 10px; padding: 13px 22px; font-size: 15px; font-weight: 700; }
+.cg-go:disabled { background: #98a2b3; opacity: 1; }
+.cg-no { background: #fff; color: #344054; border: 1px solid #d0d5dd; border-radius: 10px; padding: 12px 18px; font-size: 14px; font-weight: 600; }
+.cg-msg { margin-top: 14px; font-size: 14px; border-radius: 8px; padding: 10px 14px; }
+.cg-msg.err { background: #fef3f2; color: #b42318; }
+.cg-msg.info { background: #eff8ff; color: #175cd3; }
+.cg-skip { background: none; border: 0; color: #667085; text-decoration: underline; font-size: 12.5px; padding: 0; margin-left: auto; }
+.cg-small { color: #667085; font-size: 12.5px; margin-top: 18px; }
+
+/* Card fields are masked so card numbers never appear in screen recordings */
+.masked { -webkit-text-security: disc; text-security: disc; }
+.card-warn { grid-column: 1 / -1; background: #fef3f2; border: 2px solid #d92d20; color: #912018; border-radius: 8px; padding: 10px 14px; font-size: 13.5px; font-weight: 600; }
+.card-warn b { font-weight: 800; }
 </style>
 </head>
 <body data-variant="neutral">
 
 <!-- ================= RECORDING CONTROLS (research tooling, not part of the storefront) ================= -->
+<div class="consent-gate" id="consent-gate" role="dialog" aria-modal="true" aria-labelledby="cg-title">
+  <div class="cg-card">
+    <h1 id="cg-title">Before you start: research study information</h1>
+    <p class="cg-sub">HCI research study by Hafsa Tanveer and Yusra Ahmed. Please read this page with the researcher.</p>
+
+    <div class="cg-alert" role="alert">
+      <strong>⚠ DO NOT ENTER REAL CARD OR PERSONAL DETAILS</strong>
+      <p>Pakien is a <b>mock online store built for this research</b>. It is not a real shop. Nothing is charged, nothing is delivered and nothing you type is sent anywhere.
+      Never type your own card number, CVC, address, phone, email or password. Use only the made-up details given to you (also available from the <b>Details to use</b> button at the top of the store).</p>
+    </div>
+
+    <h2>What you will do</h2>
+    <div class="cg-tasks">
+      <div class="cg-task"><b>Task 1: Shop around</b>Browse the store and choose <b>one</b> birthday gift for a friend. Add it to your cart.</div>
+      <div class="cg-task"><b>Task 2: Check out</b>Go to checkout and place the order using the made-up details.</div>
+    </div>
+    <p class="cg-small" style="margin-top:10px">Your total budget is <b>PKR 2,500</b>, including any delivery or fees. Shop as you normally would and <b>think aloud</b>: say what you notice and why you make each choice. The tasks are shown in a banner at the top of the screen.</p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><b>A screen recording of this browser tab</b> while you do the tasks. It is saved to the researcher's computer only, not uploaded.</li>
+      <li><b>Audio of you thinking aloud</b>, recorded separately by the researcher.</li>
+      <li><b>Your participant ID</b> (below), so we can match the recording with your questionnaire. We do not collect your name.</li>
+      <li>Recordings are seen only by the two researchers, used only for this course project, and deleted when it ends.</li>
+    </ul>
+
+    <h2>Your rights</h2>
+    <ul>
+      <li>Taking part is voluntary. You can stop at any time, without giving a reason, by telling the researcher.</li>
+      <li>If you want your recording deleted later, give the researcher your participant ID.</li>
+    </ul>
+
+    <h2>Participant ID</h2>
+    <label class="cg-field">Given to you by the researcher (e.g. P07)
+      <input id="cg-pid" autocomplete="off" maxlength="12" placeholder="P07">
+    </label>
+
+    <h2>Consent</h2>
+    <div class="cg-checks" id="cg-checks">
+      <label><input type="checkbox"> I am 18 or older.</label>
+      <label><input type="checkbox"> I understand Pakien is a mock store for research, not a real retailer, and no real payment or order is involved.</label>
+      <label><input type="checkbox"> I will <b>not</b> enter my real card or personal details. I will use only the made-up details provided.</label>
+      <label><input type="checkbox"> I agree to my screen being recorded (and my voice, by the researcher) while I do the tasks.</label>
+    </div>
+
+    <div class="cg-actions">
+      <button class="cg-go" id="cg-go" type="button" disabled>I agree: start screen recording</button>
+      <button class="cg-no" id="cg-no" type="button">I do not agree</button>
+      <button class="cg-skip" id="cg-skip" type="button" title="Researcher only">Continue without recording</button>
+    </div>
+    <div class="cg-msg info" id="cg-hint" hidden>When the browser asks what to share, choose <b>this tab</b> and click <b>Share</b>.</div>
+    <div class="cg-msg err" id="cg-err" hidden></div>
+    <p class="cg-small">Nothing is recorded until you click "I agree: start screen recording" and approve the browser's share prompt.</p>
+  </div>
+</div>
+
+<div class="taskbar" id="taskbar" hidden>
+  <span class="tb-label">Your tasks</span>
+  <span class="task-chip active" id="task-1"><span class="tc-num">1</span><span><b>Shop around:</b> choose one gift and add it to your cart</span></span>
+  <span class="task-chip" id="task-2"><span class="tc-num">2</span><span><b>Check out:</b> place the order</span></span>
+  <span class="tb-budget">Budget PKR 2,500 total</span>
+  <button class="tb-details" id="tb-details" type="button" aria-expanded="false">Details to use ▾</button>
+</div>
+<div class="persona-pop" id="persona-pop" hidden>
+  <h4>Made-up details to use</h4>
+  <p class="pp-warn">Never use your own details or a real card.</p>
+  <dl>
+    <dt>Name</dt><dd>Ayesha Khan</dd>
+    <dt>Phone</dt><dd>0300 1234567</dd>
+    <dt>City</dt><dd>Karachi</dd>
+    <dt>Address</dt><dd>House 12, Street 4, Block B, Gulshan-e-Iqbal</dd>
+    <dt>Postal code</dt><dd>75300</dd>
+    <dt>Email</dt><dd>ayesha.khan@example.com</dd>
+    <dt>Password</dt><dd>Pakien2026</dd>
+    <dt>Test card</dt><dd>4242 4242 4242 4242</dd>
+    <dt>Expiry / CVC</dt><dd>12/30 · 123</dd>
+  </dl>
+</div>
+
 <div class="rec-panel" id="rec-panel">
-  <button class="rec-btn" id="rec-start" type="button"><span class="rec-icon" aria-hidden="true"></span>Begin Study</button>
+  <button class="rec-btn" id="rec-start" type="button" hidden><span class="rec-icon" aria-hidden="true"></span>Begin Study</button>
   <div class="rec-live" id="rec-live" hidden>
     <span class="rec-dot" aria-hidden="true"></span>Recording
     <button class="rec-stop" id="rec-stop" type="button">End Session</button>
@@ -369,9 +502,10 @@ footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted)
               </div>
             </fieldset>
             <div class="fields" id="card-fields">
-              <label class="field full">Card number<input name="card" placeholder="4242 4242 4242 4242" autocomplete="off"></label>
-              <label class="field">Expiry<input name="exp" placeholder="MM/YY" autocomplete="off"></label>
-              <label class="field">CVC<input name="cvc" placeholder="123" autocomplete="off"></label>
+              <p class="card-warn">⚠ Do NOT enter a real card. Use the test card <b>4242 4242 4242 4242</b>, expiry <b>12/30</b>, CVC <b>123</b>. Card details are hidden as you type.</p>
+              <label class="field full">Card number<input name="card" class="masked" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="off" data-lpignore="true" spellcheck="false"></label>
+              <label class="field">Expiry<input name="exp" class="masked" placeholder="MM/YY" autocomplete="off" data-lpignore="true" spellcheck="false"></label>
+              <label class="field">CVC<input name="cvc" class="masked" inputmode="numeric" placeholder="123" autocomplete="off" data-lpignore="true" spellcheck="false"></label>
               <label class="field full">Name on card<input name="cardname" autocomplete="off"></label>
             </div>
             <fieldset>
@@ -895,6 +1029,93 @@ footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted)
   var stopBtn = document.getElementById('rec-stop');
   var confirmEl = document.getElementById('view-confirm');
   var stream = null, recorder = null, chunks = [];
+  var gate = document.getElementById('consent-gate');
+  var goBtn = document.getElementById('cg-go');
+  var noBtn = document.getElementById('cg-no');
+  var skipBtn = document.getElementById('cg-skip');
+  var pidInput = document.getElementById('cg-pid');
+  var checks = Array.prototype.slice.call(document.querySelectorAll('#cg-checks input'));
+  var errBox = document.getElementById('cg-err');
+  var hintBox = document.getElementById('cg-hint');
+  var taskbar = document.getElementById('taskbar');
+  var t1 = document.getElementById('task-1');
+  var t2 = document.getElementById('task-2');
+  var detailsBtn = document.getElementById('tb-details');
+  var pop = document.getElementById('persona-pop');
+  var participant = '';
+  var finished = false;
+
+  /* ----- consent gate ----- */
+  function pidValue() { return pidInput.value.trim().replace(/[^A-Za-z0-9_-]/g, ''); }
+  function updateGo() { goBtn.disabled = !(pidValue() && checks.every(function (c) { return c.checked; })); }
+  checks.forEach(function (c) { c.addEventListener('change', updateGo); });
+  pidInput.addEventListener('input', updateGo);
+
+  function showErr(msg) { errBox.textContent = msg; errBox.hidden = !msg; }
+
+  function openGate() {
+    checks.forEach(function (c) { c.checked = false; });
+    pidInput.value = '';
+    updateGo();
+    showErr('');
+    hintBox.hidden = true;
+    finished = false;
+    gate.hidden = false;
+    taskbar.hidden = true;
+    pop.hidden = true;
+    document.body.classList.remove('study-on');
+    startBtn.hidden = true;
+    gate.scrollTop = 0;
+  }
+
+  function enterStore() {
+    participant = pidValue() || participant;
+    gate.hidden = true;
+    taskbar.hidden = false;
+    document.body.classList.add('study-on');
+    updateTasks();
+  }
+
+  goBtn.addEventListener('click', function () {
+    participant = pidValue();
+    showErr('');
+    hintBox.hidden = false;
+    startRecording(enterStore, function () {
+      hintBox.hidden = true;
+      showErr('Screen recording did not start. Click the button again and, when the browser asks, choose this tab and click Share.');
+    });
+  });
+  noBtn.addEventListener('click', function () {
+    showErr('Thank you. Nothing has been recorded. Please let the researcher know you do not wish to take part.');
+  });
+  skipBtn.addEventListener('click', function () {
+    if (!pidValue() || !checks.every(function (c) { return c.checked; })) {
+      showErr('Consent is still needed: enter the participant ID and tick all four boxes first.');
+      return;
+    }
+    startBtn.hidden = false;
+    enterStore();
+  });
+
+  /* ----- task banner ----- */
+  function viewShown(id) { var el = document.getElementById(id); return el && el.classList.contains('shown'); }
+  function updateTasks() {
+    if (viewShown('view-confirm')) finished = true;
+    var inCheckout = viewShown('view-checkout');
+    t1.className = 'task-chip ' + (inCheckout || finished ? 'done' : 'active');
+    t2.className = 'task-chip ' + (finished ? 'done' : (inCheckout ? 'active' : ''));
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.view'), function (v) {
+    new MutationObserver(updateTasks).observe(v, { attributes: true, attributeFilter: ['class'] });
+  });
+  detailsBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    pop.hidden = !pop.hidden;
+    detailsBtn.setAttribute('aria-expanded', String(!pop.hidden));
+  });
+  document.addEventListener('click', function (e) {
+    if (!pop.hidden && !pop.contains(e.target) && e.target !== detailsBtn) { pop.hidden = true; detailsBtn.setAttribute('aria-expanded', 'false'); }
+  });
 
   function showNote(text, ms) {
     var n = document.createElement('div');
@@ -909,7 +1130,7 @@ footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted)
     var d = new Date();
     var stamp = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + '_' +
       pad(d.getHours()) + '-' + pad(d.getMinutes()) + '-' + pad(d.getSeconds());
-    return 'pakien-' + variant + '-' + stamp + '.webm';
+    return 'pakien-' + (participant ? participant + '-' : '') + variant + '-' + stamp + '.webm';
   }
 
   function pickMimeType() {
@@ -945,9 +1166,10 @@ footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted)
     if (stream) { stream.getTracks().forEach(function (t) { t.stop(); }); stream = null; }
   }
 
-  function startRecording() {
+  function startRecording(onOk, onFail) {
     if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
-      showNote('This browser cannot record the screen. Please use a recent Chrome, Edge or Firefox.', 6000);
+      if (onFail) onFail();
+      showErr('This browser cannot record the screen. Please use a recent Chrome or Edge.');
       return;
     }
     var mimeType = pickMimeType();
@@ -973,12 +1195,14 @@ footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted)
       recorder.start();
       startBtn.hidden = true;
       liveBox.hidden = false;
+      if (onOk) onOk();
     }).catch(function () {
-      showNote('Screen-recording permission was not granted, so no video will be saved. Click Begin Study to try again.', 5000);
+      if (onFail) onFail();
     });
   }
 
-  startBtn.addEventListener('click', startRecording);
+  // "Begin Study" (shown after a session ends) re-opens the consent page for the next participant.
+  startBtn.addEventListener('click', openGate);
   stopBtn.addEventListener('click', stopRecording);
 
   if (confirmEl) {
